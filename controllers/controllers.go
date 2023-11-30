@@ -101,7 +101,7 @@ func EditaTipo(w http.ResponseWriter, r *http.Request) {
 }
 
 // FUNÇÕES PARA PERFIS
-func TodosPerfis(w http.ResponseWriter, r *http.Request) {
+func TodosPerfils(w http.ResponseWriter, r *http.Request) {
 	var p []models.Perfil
 	database.DB.Find(&p)
 	json.NewEncoder(w).Encode(p)

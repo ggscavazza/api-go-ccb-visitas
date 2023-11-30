@@ -31,11 +31,11 @@ func HandleRequest() {
 	r.HandleFunc("/api/tipos/{id}", controllers.EditaTipo).Methods("Put")
 
 	// Rotas da API para PERFIS
-	r.HandleFunc("/api/perfis", controllers.TodosPerfis).Methods("Get")
-	r.HandleFunc("/api/perfis/{id}", controllers.RetornaUmPerfil).Methods("Get")
-	r.HandleFunc("/api/perfis", controllers.CriaUmNovoPerfil).Methods("Post")
-	r.HandleFunc("/api/perfis/{id}", controllers.DeletaUmPerfil).Methods("Delete")
-	r.HandleFunc("/api/perfis/{id}", controllers.EditaPerfil).Methods("Put")
+	r.HandleFunc("/api/perfils", controllers.TodosPerfils).Methods("Get")
+	r.HandleFunc("/api/perfils/{id}", controllers.RetornaUmPerfil).Methods("Get")
+	r.HandleFunc("/api/perfils", controllers.CriaUmNovoPerfil).Methods("Post")
+	r.HandleFunc("/api/perfils/{id}", controllers.DeletaUmPerfil).Methods("Delete")
+	r.HandleFunc("/api/perfils/{id}", controllers.EditaPerfil).Methods("Put")
 
 	log.Fatal(http.ListenAndServe(":8000", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r)))
 }
