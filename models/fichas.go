@@ -1,6 +1,7 @@
 package models
 
 type Ficha struct {
+	Id            int    `json:"id"`
 	Nome          string `json:"nome"`
 	Sobrenome     string `json:"sobrenome"`
 	Endereco      string `json:"endereco"`

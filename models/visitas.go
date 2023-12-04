@@ -1,6 +1,7 @@
 package models
 
 type Visita struct {
+	Id         int    `json:"id"`
 	Ficha      int    `json:"id_ficha"`
 	Data       string `json:"data"`
 	Horario    string `json:"horario"`

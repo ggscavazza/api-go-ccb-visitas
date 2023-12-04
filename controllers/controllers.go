@@ -162,8 +162,14 @@ func RetornaUmaIgreja(w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 
 	var igreja models.Igreja
-	database.DB.First(&igreja, id)
-	json.NewEncoder(w).Encode(igreja)
+
+	resp := database.DB.First(&igreja, id)
+
+	if resp.RowsAffected > 0 {
+		json.NewEncoder(w).Encode(igreja)
+	} else {
+		w.WriteHeader(http.StatusNoContent) // Status 204 No Content
+	}
 }
 
 func CriaUmaNovaIgreja(w http.ResponseWriter, r *http.Request) {
