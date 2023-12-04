@@ -37,5 +37,26 @@ func HandleRequest() {
 	r.HandleFunc("/api/perfils/{id}", controllers.DeletaUmPerfil).Methods("Delete")
 	r.HandleFunc("/api/perfils/{id}", controllers.EditaPerfil).Methods("Put")
 
+	// Rotas da API para IGREJAS
+	r.HandleFunc("/api/igrejas", controllers.TodasIgrejas).Methods("Get")
+	r.HandleFunc("/api/igrejas/{id}", controllers.RetornaUmaIgreja).Methods("Get")
+	r.HandleFunc("/api/igrejas", controllers.CriaUmaNovaIgreja).Methods("Post")
+	r.HandleFunc("/api/igrejas/{id}", controllers.DeletaUmaIgreja).Methods("Delete")
+	r.HandleFunc("/api/igrejas/{id}", controllers.EditaIgreja).Methods("Put")
+
+	// Rotas da API para FICHAS
+	r.HandleFunc("/api/fichas", controllers.TodasFichas).Methods("Get")
+	r.HandleFunc("/api/fichas/{id}", controllers.RetornaUmaFicha).Methods("Get")
+	r.HandleFunc("/api/fichas", controllers.CriaUmaNovaFicha).Methods("Post")
+	r.HandleFunc("/api/fichas/{id}", controllers.DeletaUmaFicha).Methods("Delete")
+	r.HandleFunc("/api/fichas/{id}", controllers.EditaFicha).Methods("Put")
+
+	// Rotas da API para VISITAS
+	r.HandleFunc("/api/visitas", controllers.TodasVisitas).Methods("Get")
+	r.HandleFunc("/api/visitas/{id}", controllers.RetornaUmaVisita).Methods("Get")
+	r.HandleFunc("/api/visitas", controllers.CriaUmaNovaVisita).Methods("Post")
+	r.HandleFunc("/api/visitas/{id}", controllers.DeletaUmaVisita).Methods("Delete")
+	r.HandleFunc("/api/visitas/{id}", controllers.EditaVisita).Methods("Put")
+
 	log.Fatal(http.ListenAndServe(":8000", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r)))
 }

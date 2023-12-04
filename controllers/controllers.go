@@ -31,9 +31,12 @@ func RetornaUmUsuario(w http.ResponseWriter, r *http.Request) {
 }
 
 func CriaUmNovoUsuario(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated)
+
 	var novoUsuario models.Usuario
 	json.NewDecoder(r.Body).Decode(&novoUsuario)
 	database.DB.Create(&novoUsuario)
+
 	json.NewEncoder(w).Encode(novoUsuario)
 }
 
@@ -74,6 +77,8 @@ func RetornaUmTipo(w http.ResponseWriter, r *http.Request) {
 }
 
 func CriaUmNovoTipo(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated)
+
 	var novoTipo models.Tipo
 	json.NewDecoder(r.Body).Decode(&novoTipo)
 	database.DB.Create(&novoTipo)
@@ -117,6 +122,8 @@ func RetornaUmPerfil(w http.ResponseWriter, r *http.Request) {
 }
 
 func CriaUmNovoPerfil(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated)
+
 	var novoPerfil models.Perfil
 	json.NewDecoder(r.Body).Decode(&novoPerfil)
 	database.DB.Create(&novoPerfil)
@@ -141,4 +148,139 @@ func EditaPerfil(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&perfil)
 	database.DB.Save(&perfil)
 	json.NewEncoder(w).Encode(perfil)
+}
+
+// FUNÇÕES PARA IGREJAS
+func TodasIgrejas(w http.ResponseWriter, r *http.Request) {
+	var p []models.Igreja
+	database.DB.Find(&p)
+	json.NewEncoder(w).Encode(p)
+}
+
+func RetornaUmaIgreja(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	var igreja models.Igreja
+	database.DB.First(&igreja, id)
+	json.NewEncoder(w).Encode(igreja)
+}
+
+func CriaUmaNovaIgreja(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated)
+
+	var novaIgreja models.Igreja
+	json.NewDecoder(r.Body).Decode(&novaIgreja)
+	database.DB.Create(&novaIgreja)
+	json.NewEncoder(w).Encode(novaIgreja)
+}
+
+func DeletaUmaIgreja(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	var igreja models.Igreja
+	database.DB.Delete(&igreja, id)
+	json.NewEncoder(w).Encode(igreja)
+}
+
+func EditaIgreja(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	var igreja models.Igreja
+	database.DB.First(&igreja, id)
+	json.NewDecoder(r.Body).Decode(&igreja)
+	database.DB.Save(&igreja)
+	json.NewEncoder(w).Encode(igreja)
+}
+
+// FUNÇÕES PARA FICHAS
+func TodasFichas(w http.ResponseWriter, r *http.Request) {
+	var p []models.Ficha
+	database.DB.Find(&p)
+	json.NewEncoder(w).Encode(p)
+}
+
+func RetornaUmaFicha(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	var ficha models.Ficha
+	database.DB.First(&ficha, id)
+	json.NewEncoder(w).Encode(ficha)
+}
+
+func CriaUmaNovaFicha(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated)
+
+	var novaFicha models.Ficha
+	json.NewDecoder(r.Body).Decode(&novaFicha)
+	database.DB.Create(&novaFicha)
+	json.NewEncoder(w).Encode(novaFicha)
+}
+
+func DeletaUmaFicha(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	var ficha models.Ficha
+	database.DB.Delete(&ficha, id)
+	json.NewEncoder(w).Encode(ficha)
+}
+
+func EditaFicha(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	var ficha models.Ficha
+	database.DB.First(&ficha, id)
+	json.NewDecoder(r.Body).Decode(&ficha)
+	database.DB.Save(&ficha)
+	json.NewEncoder(w).Encode(ficha)
+}
+
+// FUNÇÕES PARA VISITAS
+func TodasVisitas(w http.ResponseWriter, r *http.Request) {
+	var p []models.Visita
+	database.DB.Find(&p)
+	json.NewEncoder(w).Encode(p)
+}
+
+func RetornaUmaVisita(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	var visita models.Visita
+	database.DB.First(&visita, id)
+	json.NewEncoder(w).Encode(visita)
+}
+
+func CriaUmaNovaVisita(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated)
+
+	var novaVisita models.Visita
+	json.NewDecoder(r.Body).Decode(&novaVisita)
+	database.DB.Create(&novaVisita)
+	json.NewEncoder(w).Encode(novaVisita)
+}
+
+func DeletaUmaVisita(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	var visita models.Visita
+	database.DB.Delete(&visita, id)
+	json.NewEncoder(w).Encode(visita)
+}
+
+func EditaVisita(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	var visita models.Visita
+	database.DB.First(&visita, id)
+	json.NewDecoder(r.Body).Decode(&visita)
+	database.DB.Save(&visita)
+	json.NewEncoder(w).Encode(visita)
 }
